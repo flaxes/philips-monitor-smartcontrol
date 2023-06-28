@@ -73,7 +73,7 @@ class Client {
      * @param {keyof COLOR_TEMPERATURE_TYPE} mode
      */
     setColorTemperature(mode) {
-        const modeNum = SMART_IMAGE_TYPE[mode];
+        const modeNum = COLOR_TEMPERATURE_TYPE[mode];
 
         if (typeof modeNum !== "number") {
             throw new Error(`[${mode}] IS UNKNOWN COLOR-TEMPERATURE`);

@@ -18,7 +18,9 @@ Official software required to be installed and started in background on your PC.
 
 1. Clone repo in any desired folder.
 2. Run `npm install --omit=dev` inside this folder.
-3. ????????? (WIP)
+3. Use one of profiles. Or create your own one. (default, fps, srgb is created already)
+4. Check `smartcontrol` directory for possible variables in profile/CLI
+5. Run `node . profile <profilename>` (i.e `node . profile fps`) inside of directory
 
 ## Functions
 
