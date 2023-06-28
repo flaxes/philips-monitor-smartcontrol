@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const { join } = require("path");
+const { wait } = require("../modules/helpers");
 const PROFILE_DIR = "../profiles";
 
 const profiles = fs.readdirSync(join(__dirname, PROFILE_DIR)).map((item) => item.replace(".json", ""));
@@ -32,18 +33,23 @@ async function smartimage(client, args) {
     "brightness": 50
 }
      */
-    if (typeof profile.brightness === "number") {
-        client.setBrightness(profile.brightness);
-    }
 
     if (profile.smartimage) {
-        client.setSmartImage(profile.smartimage);
+        await client.setSmartImage(profile.smartimage);
+        console.log(`Set smart image: ${profile.smartimage}`);
     }
 
     if (profile.temperature) {
-        client.setColorTemperature(profile.temperature);
+        await client.setColorTemperature(profile.temperature);
+        console.log(`Set temperature: ${profile.temperature}`);
     }
 
+    if (typeof profile.brightness === "number") {
+        await client.setBrightness(profile.brightness);
+        console.log(`Set brightness: ${profile.brightness}`);
+    }
+
+    await wait(500);
     console.log(`[${profileName}] SET`);
 }
 

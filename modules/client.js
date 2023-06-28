@@ -29,7 +29,9 @@ class Client {
 
         return new Promise((resolve, reject) => {
             client._client.on("open", () => {
-                client.send({ protocol: "json", version: 1 });
+                client.send({ protocol: "json", version: 1 }, () => {
+                    console.debug("Sending initial packet");
+                });
             });
 
             client._client.once("message", (firstMsg) => {
@@ -100,8 +102,8 @@ class Client {
      *
      * @param {string | object} msg
      */
-    send(msg) {
-        this._client.send(`${typeof msg === "object" ? JSON.stringify(msg) : msg}${END}`);
+    send(msg, cb) {
+        this._client.send(`${typeof msg === "object" ? JSON.stringify(msg) : msg}${END}`, cb);
     }
 
     /**
@@ -114,7 +116,13 @@ class Client {
     sendId(target, type, arg = []) {
         arg.unshift(uuid.v4());
 
-        this.send({ arguments: arg, invocationId: `${this._requestId++}`, target, type });
+        return new Promise((resolve, reject) => {
+            this.send({ arguments: arg, invocationId: `${this._requestId++}`, target, type }, (err) => {
+                if (err) return reject(err);
+
+                resolve(void 0);
+            });
+        });
     }
 }
 
