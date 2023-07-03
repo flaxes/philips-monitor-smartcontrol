@@ -89,11 +89,13 @@ class Client {
      * @param {number} num
      * @returns
      */
-    setBrightness(num) {
+    async setBrightness(num) {
+        
         if (typeof num !== "number" || num < 0 || num > 100) {
             throw new Error(`[${num}] IS INVALID BRIGHTNESS (check number)`);
         }
-
+        await this.sendId("SetOSD", 1, ["OP_10_Luminance", 0]);
+        
         return this.sendId("SetOSD", 1, ["OP_10_Luminance", num]);
     }
 
