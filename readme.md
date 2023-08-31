@@ -14,6 +14,10 @@ Official software required to be installed and started in background on your PC.
 
 [Download here](https://www.philips.co.uk/c-p/27M1F5500P_00/evnia-gaming-monitor-quad-hd-gaming-monitor/support)
 
+-   Supported version: `2023-08-30`
+
+> Other versions might support too, but some features can/cannot work
+
 ## Installing
 
 1. Clone repo in any desired folder.
